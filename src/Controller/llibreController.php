@@ -5,8 +5,9 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class llibreController 
+class llibreController extends AbstractController
 {
     
     private $llibres = array(
@@ -26,15 +27,12 @@ class llibreController
         });
         if (count($resultat) > 0)
         {
-            $resposta = "";
-            $resultat = array_shift($resultat);
-            $resposta .= "<ul><li>" . $resultat["titol"] . "</li>" .
-            "<li>" . $resultat["autor"] . "</li>" .
-            "<li>" . $resultat["pagines"] . "</li></ul>";
-            return new Response("<html><body>$resposta</body></html>");
+            return $this->render('fitxa_llibre.html.twig',
+                        array('llibre' => array_shift($resultat)));
             }
             else 
-            return new Response("llibre no trobat");
+            return $this->render('fitxa_llibre.html.twig', 
+                        array('llibre' => NULL));
             }
             }
         /**
@@ -48,16 +46,8 @@ class llibreController
                 {
                     return strpos($llibre["titol"], $isbn) !== FALSE;
                 });
-                $resposta = "";
-                if (count($resultat) > 0)
-                {
-                    foreach ($resultat as $llibre)
-                    $resposta .= "<ul><li>" . $llibre["titol"] . "</li>" .
-                    "<li>" . $llibre["autor"] . "</li>" .
-                    "<li>" . $llibre["pagines"] . "</li></ul>";
-                    return new Response("<html><body>" . $resposta . "</body></html>");
-                }
-                else
-                return new Response("No s'han trobat llibres");
+                return $this->render('llista_llibres.html.twig',
+                array('llibres' => $resultat));
+                
             }
 ?>

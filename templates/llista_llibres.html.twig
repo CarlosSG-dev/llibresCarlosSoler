@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Llibres{% endblock %}
+{% block body %}
+    <h1>Llistat de llibres</h1>
+    {% if llibres %}
+    {% for llibre in llibres %}<ul>
+        <li><strong>{{ llibre.titol }}</strong></li>
+        <li><strong>Autor</strong>: {{ llibre.autor }}</li>
+        <li><strong>Pàgines</strong>: {{ llibre.pagines }}</li>
+    </ul>{% endfor %}
+    {% else %}
+    <p>No s'han trobat llibres</p>
+    {% endif %}
+    {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Llibres{% endblock %}
+{% block body %}
+    <h1>Fitxa de llibre</h1>
+    {% if llibre %}
+    <ul>
+        <li><strong>{{ llibre.titol }}</strong></li>
+        <li><strong>Autor</strong>: {{ llibre.autor }}</li>
+        <li><strong>Pàgines</strong>: {{ llibre.pagines }}</li>
+    </ul>
+    <a href ="{{ path('inici') }}">Tornar a l'inici</a>
+    {% else %}
+    <p>Llibre no trobat</p>
+    <img src=src="{{ asset('src/assets/lupa_error.png') }}"/>
+    <p><a href ="{{ path('inici') }}">Tornar a l'inici</a></p>
+    {% endif %}
+    {% endblock %}
