@@ -3,12 +3,40 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Psr\Log\LoggerInterface;
+use App\Service\BDProvaLlibres;
+
+
+
 class IniciController extends AbstractController{
+
+    private $logger;
+    private $llibres;
+    
+    
+    
+    public function __construct(LoggerInterface $logger,BDProvaLlibres $bdProva)
+    {
+        $this->logger = $logger;
+        $this->llibres = $bdProva->get();
+    
+        
+    }
+
+    
+   
+   
 
     /*** @Route("/", name="inici")*/
     
     public function inici(){
-        return $this->render('inici.html.twig');
+        $data_hora = new \DateTime();
+        $this->logger->info("Accés el " 
+        .$data_hora->format("d/m/y H:i:s"));
+        return $this->render('inici.html.twig',
+        array('llibres' => $this->llibres));
     }
+
+   
 }
 ?>

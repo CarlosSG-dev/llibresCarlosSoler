@@ -6,5 +6,12 @@
     <p>Pàgina d'inici</p>
     <p>Projecte Symfony 2n DAW</p>
     <p>Curs 20/21</p>
+
+    <h1>Llistat de llibres</h1>
+    {% for llibre in llibres %}<ul>
+        <li><strong><a href="llibre/{{llibre.isbn}}">{{ llibre.titol }}</a></strong></li>
+    </ul>{% endfor %}
+    
+    
     <a href ="{{ path('fitxa_llibre', {'isbn': 'A111B3'}) }}"><img src="{{ asset('src/assets/libro.png') }}"></a>
     {% endblock %}

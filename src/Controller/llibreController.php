@@ -6,16 +6,16 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\BDProvaLlibres;
 
 class llibreController extends AbstractController
 {
+    private $llibres;
+
+    public function __construct(BDProvaLlibres $dades){
+        $this->llibres = $dades->get();
+    }
     
-    private $llibres = array(
-        array("isbn"  =>  "A111B3",  "titol"  =>  "El   joc   d'Ender",  "autor"=>"Orson Scott Card", "pagines" => 350),
-        array("isbn"  =>  "A123B1",  "titol"  =>  "Don Quixot",  "autor"=>"Miguel de Cervantes", "pagines" => 350),
-        array("isbn"  =>  "A123B2",  "titol"  =>  "El senyor dels anells",  "autor"=>"J. R. R. Tolkien", "pagines" => 250),
-        array("isbn"  =>  "A123B3",  "titol"  =>  "Harry Potter",  "autor"=>"J.K Rowling", "pagines" => 550), 
-        );
     /**
      * @Route("/llibre/{isbn}", name="fitxa_llibre")
      */
