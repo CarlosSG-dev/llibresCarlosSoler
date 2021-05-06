@@ -5,23 +5,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Psr\Log\LoggerInterface;
 use App\Service\BDProvaLlibres;
+use App\Entity\Llibre;
+
 
 
 
 class IniciController extends AbstractController{
 
-    private $logger;
-    private $llibres;
+    // private $logger;
+    // private $llibres;
     
     
     
-    public function __construct(LoggerInterface $logger,BDProvaLlibres $bdProva)
-    {
-        $this->logger = $logger;
-        $this->llibres = $bdProva->get();
+    // public function __construct(LoggerInterface $logger,$bdProva)
+    // {
+    //     $this->logger = $logger;
+    //     $this->llibres = $bdProva->get();
     
         
-    }
+    // }
 
     
    
@@ -30,12 +32,17 @@ class IniciController extends AbstractController{
     /*** @Route("/", name="inici")*/
     
     public function inici(){
-        $data_hora = new \DateTime();
-        $this->logger->info("Accés el " 
-        .$data_hora->format("d/m/y H:i:s"));
+        $repositori = $this->getDoctrine()->getRepository(Llibre::class);
+        $llibre = $repositori->findAll();
+        // $data_hora = new \DateTime();
+        // $this->logger->info("Accés el " 
+        // .$data_hora->format("d/m/y H:i:s"));
         return $this->render('inici.html.twig',
-        array('llibres' => $this->llibres));
+        array('llibres' => $llibre));
     }
+
+ 
+
 
    
 }
