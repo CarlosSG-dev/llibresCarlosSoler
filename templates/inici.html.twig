@@ -9,7 +9,9 @@
 
     <h1>Llistat de llibres</h1>
     {% for llibre in llibres %}<ul>
-        <li><strong><a href="llibre/{{llibre.isbn}}">{{ llibre.titol }}</a></strong></li>
+        <li><strong><a href="llibre/{{llibre.isbn}}">{{ llibre.titol }}</a></strong>
+        <a href="llibre/editar/{{llibre.isbn}}"><img src="{{ absolute_url(asset('assets/editar.png')) }}"/></a>
+        </li>
     </ul>{% endfor %}
     
     

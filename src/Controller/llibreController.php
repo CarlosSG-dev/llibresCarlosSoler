@@ -8,6 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Llibre;
 use App\Entity\Editorial;
+use App\Form\LlibreType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
+
 
 
 
@@ -92,6 +97,52 @@ public function inserirAmbEditorial() {
     return new Response("Llibre amb Editorial inserit amb isbn: " . $llibre5->getIsbn());
     } catch (\Exception $e) {
         return new Response("Error inserint el llibre amb Editorial amb isbn: " . $llibre5->getIsbn());
+    }
+}
+
+/**
+* @Route("/llibre/nou", name="nou_llibre")
+*/
+
+public function nou(Request $request) {
+    $llibre = new Llibre();
+    $formulari = $this->createForm(LlibreType::class, $llibre);
+
+    $formulari->handleRequest($request);
+    if ($formulari->isSubmitted() && $formulari->isValid()) {
+        $llibre = $formulari->getData();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($llibre);
+    }
+    try {
+        $entityManager->flush();
+        return $this->redirectToRoute('inici');
+    } catch (\Exception $e) {
+        return $this->render('nou.html.twig', array('formulari' => $formulari->createView()));
+    }
+}
+
+
+/**
+* @Route("/llibre/editar/{isbn}", name="editar_llibre")
+*/
+
+public function editar(Request $request, $isbn) {
+    $repositori = $this->getDoctrine()->getRepository(Llibre::class);
+    $llibre = $repositori->find($isbn);
+    $formulari = $this->createForm(LlibreType::class, $llibre);
+
+    $formulari->handleRequest($request);
+    if ($formulari->isSubmitted() && $formulari->isValid()) {
+        $llibre = $formulari->getData();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($llibre);
+    }
+    try {
+        $entityManager->flush();
+        return $this->redirectToRoute('inici');
+    } catch (\Exception $e) {
+        return $this->render('nou.html.twig', array('formulari' => $formulari->createView()));
     }
 }
 
