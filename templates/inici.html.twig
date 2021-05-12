@@ -10,10 +10,10 @@
     <h1>Llistat de llibres</h1>
     {% for llibre in llibres %}<ul>
         <li><strong><a href="llibre/{{llibre.isbn}}">{{ llibre.titol }}</a></strong>
-        <a href="llibre/editar/{{llibre.isbn}}"><img src="{{ absolute_url(asset('assets/editar.png')) }}"/></a>
+        <a href="llibre/editar/{{llibre.isbn}}"><img src="{{ absolute_url(asset('assets/editar.png')) }}" width="50" height="50"/></a>
         </li>
     </ul>{% endfor %}
     
     
-    <a href ="{{ path('fitxa_llibre', {'isbn': 'A111B3'}) }}"><img src="{{ asset('src/assets/libro.png') }}"></a>
+    <a href ="{{ path('fitxa_llibre', {'isbn': 'A111B3'}) }}"><img src="{{ asset('assets/libro.png') }}"></a>
     {% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}Llibres{% endblock %}
+{% block body %}
+<h1>Usuaris Biblioteca Personal Carlos Soler</h1>
+
+<table class="table table-striped">
+<thead>
+<tr>
+
+    <th>Id</th>
+
+    <th>Login</th>
+
+    <th>Password</th>
+
+    <th>Email</th>
+
+    <th>Rol</th>
+
+    <th>Editar</th>
+
+    <th>Eliminar</th>
+
+  </tr>
+
+  {% for usuari in usuaris %}
+<tr>
+     <th>{{usuari.id}}</th>
+
+    <th>{{usuari.login}}</th>
+
+    <th>{{usuari.password}}</th>
+
+    <th>{{usuari.email}}</th>
+
+    <th>{{usuari.rol}}</th>
+
+    <th><a href="usuari/editar/{{usuari.id}}"><img src="{{ absolute_url(asset('assets/editar.png')) }}" width="50" height="50"/></a></th>
+
+    <th><a href="usuari/eliminar/{{usuari.id}}"><img src="{{ absolute_url(asset('assets/eliminar.png')) }}" width="50" height="50"/></a></th>
+</tr>
+  {% endfor %}
+  
+</thead>
+
+</table>
+
+
+<a href ="{{ path('nou_usuari') }}">Crear un usuari nou</a>
+{% endblock %}

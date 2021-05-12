@@ -1,3 +1,6 @@
 inici:
    path: /
    controller: App\Controller\IniciController::inici
+
+logout:
+   path: /logout

@@ -22,6 +22,16 @@
         <a href="{{ path('inici') }}">Inici</a> 
         -
         <a href="{{ path('nou_llibre') }}">Llibre nou</a>
+        -
+    {% if is_granted('ROLE_USER') %}
+        Benvingut/a, {{ app.user.username }}
+    
+        <a href ="{{ path('logout') }}">Tancar sessió</a>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        -<a href="{{ path('usuaris') }}">Gestió d'usuaris</a>
+    {% endif %}
         <br>
         {% block body %}{% endblock %}
     </body>
