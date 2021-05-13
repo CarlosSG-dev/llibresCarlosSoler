@@ -30,6 +30,7 @@
     {% endif %}
 
     {% if is_granted('ROLE_ADMIN') %}
+         -<a href="{{ path('admin') }}">Easy Admin</a>
         -<a href="{{ path('usuaris') }}">Gestió d'usuaris</a>
     {% endif %}
         <br>

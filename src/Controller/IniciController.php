@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Psr\Log\LoggerInterface;
 use App\Service\BDProvaLlibres;
 use App\Entity\Llibre;
+use Jenssegers\Date\Date;
 
 
 
@@ -37,8 +38,12 @@ class IniciController extends AbstractController{
         // $data_hora = new \DateTime();
         // $this->logger->info("Accés el " 
         // .$data_hora->format("d/m/y H:i:s"));
+
+        Date::setLocale('ca');
+        $date = Date::now()->format('l j \de F \d\e\l Y\, \c\a\r\r\e\g\a\t \a \l\e\s h:i:s');
+        $date =ucfirst($date);
         return $this->render('inici.html.twig',
-        array('llibres' => $llibre));
+        array('llibres' => $llibre, 'date' => $date));
     }
 
  

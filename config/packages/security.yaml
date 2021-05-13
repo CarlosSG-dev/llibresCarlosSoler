@@ -31,8 +31,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/llibre/nou, roles: ROLE_ADMIN }
-        - { path: ^/llibre/editar, roles: ROLE_ADMIN }
+        - { path: ^/llibre/nou, roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/llibre/editar, roles: [ROLE_ADMIN, ROLE_USER] }
         - { path: ^/, roles: [ROLE_USER, ROLE_ADMIN] }
     encoders:
         App\Entity\Usuari:
